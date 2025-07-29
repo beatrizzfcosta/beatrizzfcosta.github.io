@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-black text-green-400 font-mono text-sm">
+<body class="bg-black text-white font-mono text-sm">
   <div class="flex items-center justify-center min-h-screen">
     <div class="relative">
       <div class="absolute inset-0 bg-green-500 blur-2xl opacity-70 rounded-xl z-0"></div>
@@ -28,8 +28,8 @@
             </span>
           </div>
         </div>
-        <div class="pl-2 pt-1 overflow-hidden flex-1">
-          <div id="terminal-output" class="overflow-y-auto h-full pr-2 scroll-smooth">
+        <div class=" overflow-hidden flex-1">
+          <div id="terminal-output" class="overflow-y-auto h-full pt-1 pl-2 pr-2 scroll-smooth">
             <!-- Conteúdo e comandos vão aqui -->
           </div>
         </div>
@@ -85,11 +85,11 @@
       wrapper.className = "flex items-center gap-1 mt-1";
 
       const label = document.createElement("span");
-      label.className = "text-green-400";
+      label.className = "text-white";
       label.textContent = "beatrizfimadacosta@resume ~ %";
 
       const input = document.createElement("input");
-      input.className = "bg-transparent outline-none text-green-400 font-mono flex-1";
+      input.className = "bg-transparent outline-none text-white font-mono flex-1";
       input.autofocus = true;
 
       wrapper.appendChild(label);
@@ -129,8 +129,117 @@ Available commands:
             A passionate developer with a focus on creating impactful software solutions.`;
           }
           else if (command === "nano resume") {
-            response = `Opening resume in nano mode... (This is a simulation, no actual file will open)`;
+            // Substitui todo o conteúdo do terminal pelo Pico
+            terminal.innerHTML = `
+            
+        <div class="w-full h-7 bg-[#3C3C3C] rounded-t-xl relative">
+          <div class="flex items-center space-x-1 h-full pl-2 h-7 gap-1 p-2">
+            <button id="try-to-close" class="w-3 h-3 rounded-full bg-red-500"></button>
+            <button id="min-screen" class="w-3 h-3 rounded-full bg-yellow-500"></button>
+            <button id="max-screen" class="w-3 h-3 rounded-full bg-green-500"></button>
+          </div>
+          <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+            <span class="text-blue-400 text-sm mr-1">📁</span>
+            <span id="terminal-size" class="text-white text-xs font-mono p-1">
+              beatrizfimadacosta - resume - 900x700
+            </span>
+          </div>
+        </div>
+        <div class="w-full h-full flex flex-col bg-black text-white font-mono text-sm">
+          <div class="bg-white text-black px-2 flex justify-between flex-shrink-0 border-b border-gray-300">
+            <span> UW PICO 5.09 </span><span>File: resume</span>
+          </div>
+          <div id="nano-content" class="flex-1 px-2 pb-2 overflow-y-auto whitespace-pre-wrap outline-none" style="max-height: calc(100% - 80px);">
+Beatriz Costa
+FULL STACK DEVELOPER
+
+📧 beatrizcostaf02@gmail.com
+📞 +351 912 896 202
+📍 Lisboa, 1500-004, Portugal
+
+ABOUT ME
+Full Stack Developer with experience in web application development using Next.js, NestJS, and React.
+Skilled in UI/UX, system architecture, and agile methodologies.
+Strong background in both professional and volunteer tech projects, combining technical execution with strategic thinking.
+
+SKILLS
+- Attention to detail     - Docs as Code
+- C                       - PostgreSQL
+- Java                    - REST APIs
+- React                   - Next.js
+- Node.js                 - Adaptability
+- NestJS                  - Figma
+- mySQL
+
+EXTRA-CURRICULAR ACTIVITIES
+Junior Enterprise – Chief Technology Officer
+STAR Junior Enterprise / Covilhã / Jun 2023 – Jun 2024
+- Led the technical team in the planning and execution of digital projects.
+- Administered email accounts, domains, and hosting.
+- Designed and implemented web architectures.
+- Worked with WordPress, Three.js, HTML/CSS, and Git.
+
+Junior Enterprise – Frontend Developer
+STAR Junior Enterprise / Covilhã / Jan 2023 – Jun 2025
+- Developed React web applications.
+- Maintained institutional WordPress websites.
+- Used React, WordPress, HTML/CSS, and Git.
+
+WORK EXPERIENCE
+Volunteer – Director of Technology and Information Systems
+Thirst Project Portugal | Lisbon | Oct 2024 – Present
+- Led tech projects with WordPress, Firebase, Google Workspace.
+- Fostered digital collaboration and strategies.
+- Ongoing enhancement of digital tools.
+- Tech stack: WordPress, Firebase, HTML/CSS, Google Workspace.
+
+Internship – Full Stack Developer
+PRTE | Covilhã | Mar 2025 – Jun 2025
+- Contributed to Evotero (SaaS platform).
+- Used Next.js and NestJS.
+- Handled PostgreSQL and React Email.
+- Built C4 diagrams and Docs as Code.
+- Agile sprints and delivery focus.
+- Stack: Next.js, NestJS, PostgreSQL, React Email, Shadcn/UI.
+
+EDUCATION
+Master's in Computer Science and Engineering
+ISCTE | Lisboa | 2027
+- Secure systems, UX, agile, and business.
+
+Bachelor's in Computer Science and Engineering
+UBI | Covilhã | 2025
+- Proficient in software development and networks.
+- Strong academic and project experience.
+
+LINKS
+LinkedIn:  www.linkedin.com/in/beatriz-fima-da-costa
+GitHub:    https://github.com/beatrizfcosta
+Portfólio: https://beatrizfcosta.github.io/
+
+LANGUAGES
+- Portuguese 🇵🇹
+- English 🇬🇧
+          </div>
+          <div class="bg-black text-white text-xs grid grid-cols-6 gap-2 px-2 py-1 border-t border-gray-600 flex-shrink-0">
+            <div><span class="bg-white text-black">^G</span> Get Help</div>
+            <div><span class="bg-white text-black">^C</span> Copy</div>
+            <div><span class="bg-white text-black">^X</span> Exit</div>
+            <div><span class="bg-white text-black">^D</span> Download</div>
+            <div><span class="bg-white text-black">^W</span> Where is</div>
+          </div>
+        </div>
+      `;
+            
+            // Add event listener for Ctrl+X to exit nano
+            document.addEventListener('keydown', function(e) {
+              if (e.ctrlKey && e.key === 'x') {
+                e.preventDefault();
+                location.reload(); // Reload the page to return to terminal
+              }
+            });
           }
+
           else if (command === "beatriz --skills") {
             response = `Skills: JavaScript, Python, React, Node.js, SQL, HTML, CSS`;
           }
@@ -174,7 +283,7 @@ Visit:`
             response = `❌ Command not found: ${command}`;
           }
 
-          resultDiv.innerHTML = `<pre class="text-green-400 mt-1 whitespace-pre-wrap">${response}</pre>`;
+          resultDiv.innerHTML = `<pre class="text-white mt-1 whitespace-pre-wrap">${response}</pre>`;
           output.appendChild(resultDiv);
 
           createNewPrompt();
@@ -191,7 +300,7 @@ Visit:`
       output.appendChild(line1);
 
       const promptLine = document.createElement("div");
-      promptLine.innerHTML = `<span class="text-green-400">beatrizfimadacosta@resume ~ % </span><span id="typed-cmd" class="inline-block"></span>`;
+      promptLine.innerHTML = `<span class="text-white">beatrizfimadacosta@resume ~ % </span><span id="typed-cmd" class="inline-block"></span>`;
       output.appendChild(promptLine);
 
       const command = "cat helloWorld";
