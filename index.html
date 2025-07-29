@@ -1,31 +1,235 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Beatriz Costa - Currículo</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 40px; backgroun: black}
-    h1 { color: #333; }
-    section { margin-bottom: 20px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terminal Resume</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>Beatriz Costa</h1>
-  <p>Engenharia Informática | Desenvolvimento Web & Mobile</p>
 
-  <section>
-    <h2>Experiência Profissional</h2>
-    
-  </section>
+<body class="bg-black text-green-400 font-mono text-sm">
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="relative">
+      <div class="absolute inset-0 bg-green-500 blur-2xl opacity-70 rounded-xl z-0"></div>
 
-  <section>
-    <h2>Formação Académica</h2>
-    
-  </section>
+      <div id="terminal"
+        class="w-[900px] h-[700px] bg-[#1E1E1E] rounded-xl z-10 relative border border-[#5E5E5E] overflow-hidden flex flex-col">
+        <div class="w-full h-7 bg-[#3C3C3C] rounded-t-xl relative">
+          <div class="flex items-center space-x-1 h-full pl-2 gap-1">
+            <button id="try-to-close" class="w-3 h-3 rounded-full bg-red-500"></button>
+            <button id="min-screen" class="w-3 h-3 rounded-full bg-yellow-500"></button>
+            <button id="max-screen" class="w-3 h-3 rounded-full bg-green-500"></button>
+          </div>
+          <div class="absolute inset-0 flex justify-center items-center pointer-events-none">
+            <span class="text-blue-400 text-sm mr-1">📁</span>
+            <span id="terminal-size" class="text-white text-xs font-mono">
+              beatrizfimadacosta - resume - 900x700
+            </span>
+          </div>
+        </div>
+        <div class="pl-2 pt-1 overflow-hidden flex-1">
+          <div id="terminal-output" class="overflow-y-auto h-full pr-2 scroll-smooth">
+            <!-- Conteúdo e comandos vão aqui -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <section>
-    <h2>Skills</h2>
-    
-  </section>
+  <script>
+    const terminal = document.getElementById('terminal');
+    const sizeText = document.getElementById('terminal-size');
+    const tryToClose = document.getElementById('try-to-close');
+    const minBtn = document.getElementById('min-screen');
+    const maxBtn = document.getElementById('max-screen');
+    const output = document.getElementById('terminal-output');
+
+    let isMaximized = false;
+    let previousSize = { width: 900, height: 700 };
+
+    function updateSize() {
+      const width = terminal.clientWidth;
+      const height = terminal.clientHeight;
+      sizeText.textContent = `beatrizfimadacosta - resume - ${width}x${height}`;
+    }
+
+    new ResizeObserver(updateSize).observe(terminal);
+    updateSize();
+
+    tryToClose.addEventListener('click', () => {
+      output.innerHTML += `<br><span class="text-red-500">❌ ERRO: Permissão negada para fechar o terminal.</span><br>beatriz@dev:~$`;
+    });
+
+    minBtn.addEventListener('click', () => {
+      previousSize = { width: terminal.clientWidth, height: terminal.clientHeight };
+      terminal.style.width = '300px';
+      terminal.style.height = '50px';
+    });
+
+    maxBtn.addEventListener('click', () => {
+      if (!isMaximized) {
+        previousSize = { width: terminal.clientWidth, height: terminal.clientHeight };
+        terminal.style.width = '1000px';
+        terminal.style.height = '800px';
+        isMaximized = true;
+      } else {
+        terminal.style.width = previousSize.width + 'px';
+        terminal.style.height = previousSize.height + 'px';
+        isMaximized = false;
+      }
+    });
+
+    function createNewPrompt() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "flex items-center gap-1 mt-1";
+
+      const label = document.createElement("span");
+      label.className = "text-green-400";
+      label.textContent = "beatrizfimadacosta@resume ~ %";
+
+      const input = document.createElement("input");
+      input.className = "bg-transparent outline-none text-green-400 font-mono flex-1";
+      input.autofocus = true;
+
+      wrapper.appendChild(label);
+      wrapper.appendChild(input);
+      output.appendChild(wrapper);
+      input.focus();
+
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          const command = input.value.trim();
+          input.setAttribute("readonly", true);
+
+          const resultDiv = document.createElement("div");
+          let response = "";
+
+          if (command === "help") {
+            response = `
+Available commands:
+- whoami                             Summary about me
+- history                            Get to know my history
+- nano resume                        Open my full resume in nano mode
+- ls                                 List directories
+- beatriz --skills                   Show my skill set
+- cd ..                              Go back one level
+- tree education                     See my education tree
+- tree professional_experience       See my experience tree
+- open projects                      Open my GitHub Projects 
+- clear                              Clear the screen
+- help                               Show this help menu
+- Tab                                Autocomplete known paths`;
+          }
+          else if (command === "ls") {
+            response = `education/    profissional_experience/    certificates/    skills/    interests/    contact/`;
+          }
+          else if (command === "whoami") {
+            response = `Beatriz Costa 
+            A passionate developer with a focus on creating impactful software solutions.`;
+          }
+          else if (command === "nano resume") {
+            response = `Opening resume in nano mode... (This is a simulation, no actual file will open)`;
+          }
+          else if (command === "beatriz --skills") {
+            response = `Skills: JavaScript, Python, React, Node.js, SQL, HTML, CSS`;
+          }
+          else if (command === "cd ..") {
+            response = `You are now in the parent directory.`;
+          }
+          else if (command === "tree education") {
+            response = `education
+├── UBI_Engenharia_Informatica
+│   ├── Instituição: Universidade da Beira Interior
+│   ├── Grau: Licenciatura
+│   ├── Estado: Concluido (Fim: Julho 2025)
+│   └── Local: Covilhã, Portugal
+├── ISCTE_Engenharia_Informatica
+│   ├── Instituicao: Instituto Universitário de Lisboa
+│   ├── Grau: Mestrado Integrado
+│   ├── Estado: Em curso (Início: Set 2025)
+│   └── Local: Lisboa, Portugal
+`;
+          }
+          else if (command === "tree professional_experience") {
+            response = `professional_experience
+├── Software Engineer at TechCorp (2020 - Present)
+│   ├── Developed web applications using React and Node.js
+│   └── Led a team of 5 developers
+└── Intern at DevStart (2019)
+    ├── Assisted in developing mobile applications
+    └── Gained experience in Agile methodologies`;
+          }
+          else if (command === "open projects") {
+            response = `Opening GitHub Projects... (This is a simulation, no actual link will open)
+Visit:`
+          }
+          else if (command === "clear") {
+            output.innerHTML = "";
+            createWelcomeMessage(() => {
+              createNewPrompt();
+            });
+            return;
+          } else {
+            response = `❌ Command not found: ${command}`;
+          }
+
+          resultDiv.innerHTML = `<pre class="text-green-400 mt-1 whitespace-pre-wrap">${response}</pre>`;
+          output.appendChild(resultDiv);
+
+          createNewPrompt();
+          output.scrollTop = output.scrollHeight;
+        }
+      });
+
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function createWelcomeMessage(callback) {
+      const line1 = document.createElement("div");
+      line1.textContent = "Last view: Fri Jul 11 11:07:58";
+      output.appendChild(line1);
+
+      const promptLine = document.createElement("div");
+      promptLine.innerHTML = `<span class="text-green-400">beatrizfimadacosta@resume ~ % </span><span id="typed-cmd" class="inline-block"></span>`;
+      output.appendChild(promptLine);
+
+      const command = "cat helloWorld";
+      let charIndex = 0;
+      const typingSpeed = 50;
+      const typedCmdEl = document.getElementById("typed-cmd");
+
+      function typeChar() {
+        if (charIndex < command.length) {
+          typedCmdEl.textContent += command[charIndex];
+          charIndex++;
+          output.scrollTop = output.scrollHeight;
+          setTimeout(typeChar, typingSpeed);
+        } else {
+          output.innerHTML += `
+<br> ██████╗
+<br> ██╔══██╗
+<br> ██████╔╝
+<br> ██╔══██╗
+<br> ██████╔╝
+<br> ╚═════╝
+<br>
+<br>Welcome to Beatriz Costa's Terminal Resume!
+<br>You can use ↑ ↓ arrows to navigate.
+<br>Type help below:
+          `;
+          if (callback) callback();
+        }
+      }
+
+      typeChar();
+    }
+
+    // Início
+    createWelcomeMessage(() => {
+      createNewPrompt();
+    });
+  </script>
 </body>
+
 </html>
