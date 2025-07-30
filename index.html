@@ -116,17 +116,17 @@ Available commands:
 - cd ..                              Go back one level
 - tree education                     See my education tree
 - tree professional_experience       See my experience tree
+- tree volunteer                     See my volunteer work tree
 - open projects                      Open my GitHub Projects 
 - clear                              Clear the screen
 - help                               Show this help menu
 - Tab                                Autocomplete known paths`;
           }
           else if (command === "ls") {
-            response = `education/    profissional_experience/    certificates/    skills/    interests/    contact/`;
+            response = `education/    professional_experience/    volunteer/    certificates/    skills/    interests/    contact/`;
           }
           else if (command === "whoami") {
-            response = `Beatriz Costa 
-            A passionate developer with a focus on creating impactful software solutions.`;
+            response = `Full Stack Developer with experience in web application development using Next.js, NestJS, and React. Skilled in UI/UX, system architecture, and agile methodologies. Strong background in both professional and volunteer tech projects, combining technical execution with strategic thinking.`;
           }
           else if (command === "nano resume") {
             // Substitui todo o conteúdo do terminal pelo Pico
@@ -240,38 +240,130 @@ LANGUAGES
             });
           }
 
+          else if (command === "history") {
+            response = `Life truly changes when high school ends. After graduation, I enrolled at the Federal University of Rio de Janeiro to study Naval Engineering, following in my father's footsteps. At that time, I already knew that my place was out in the world, exploring new horizons, even if that meant being far from my family and missing the growth of my younger sisters.
+
+Leaving my hometown in Belém do Pará,  the gateway to the Amazon, was not easy. I carried with me the warmth of my family, the culture, and the strength of my roots. Living away from home taught me resilience and independence, but also how to value the simplest things, phone calls with my sisters and parents, the familiar sounds of my neighborhood, the comfort of being close to those I love.
+
+It was during my time in Naval Engineering that I discovered my true passion for technology. I realized that what fascinated me most was not just building ships but building solutions, using innovation to solve problems and impact lives. That realization gave me the courage to take an even bigger step: I moved to Portugal to pursue my studies in Computer Science and Engineering, embracing a completely new chapter of my life.
+
+In my first year at university in Portugal, I decided to join a Junior Enterprise. It was a way to adapt better to the culture, meet new people, and gain hands-on experience with what I was learning. This experience helped me grow quickly, both personally and professionally. I had the opportunity to work on real projects for clients, manage responsibilities, and understand how teamwork and leadership shape results.
+
+Unlike most of my classmates, in my final year I chose to undertake a major project as part of an internship rather than a traditional academic project. This decision allowed me to work on Evotero, a SaaS platform for consultant management and financial tracking, where I could apply everything I had learned so far while immersing myself in a professional environment. This experience consolidated my skills as a Full Stack Developer and gave me a clearer vision of how technology can transform businesses.
+
+Today, I combine the strength of my Amazonian roots with the experiences I've gained abroad. My career is driven by curiosity, a passion for technology, and the desire to create solutions that truly make a difference. Each project I work on reflects this path, a journey shaped by courage, adaptation, and the belief that going beyond your comfort zone is where the most meaningful growth happens.`;
+          }
           else if (command === "beatriz --skills") {
-            response = `Skills: JavaScript, Python, React, Node.js, SQL, HTML, CSS`;
+            response = `Technical Skills:
+├── Programming Languages
+│   ├── C
+│   ├── Java
+│   └── JavaScript
+├── Frontend
+│   ├── React
+│   ├── Next.js
+│   ├── HTML/CSS
+│   └── Figma
+├── Backend
+│   ├── Node.js
+│   ├── NestJS
+│   └── REST APIs
+├── Databases
+│   ├── PostgreSQL
+│   └── MySQL
+├── Tools & Platforms
+│   ├── WordPress
+│   ├── Firebase
+│   ├── Google Workspace
+│   ├── Git
+│   └── Three.js
+└── Soft Skills
+    ├── Attention to detail
+    ├── Adaptability
+    ├── UI/UX Design
+    ├── System Architecture
+    ├── Agile Methodologies
+    └── Docs as Code`;
           }
           else if (command === "cd ..") {
             response = `You are now in the parent directory.`;
           }
           else if (command === "tree education") {
-            response = `education
-├── UBI_Engenharia_Informatica
-│   ├── Instituição: Universidade da Beira Interior
-│   ├── Grau: Licenciatura
-│   ├── Estado: Concluido (Fim: Julho 2025)
-│   └── Local: Covilhã, Portugal
-├── ISCTE_Engenharia_Informatica
-│   ├── Instituicao: Instituto Universitário de Lisboa
-│   ├── Grau: Mestrado Integrado
-│   ├── Estado: Em curso (Início: Set 2025)
-│   └── Local: Lisboa, Portugal
-`;
+            response = `education/
+├── UBI_Computer_Science_Engineering/
+│   ├── Institution: Universidade da Beira Interior
+│   ├── Degree: Bachelor's in Computer Science and Engineering
+│   ├── Status: Completed (Graduation: 2025)
+│   ├── Location: Covilhã, Portugal
+│   └── Focus: Software development and networks
+└── ISCTE_Computer_Science_Engineering/
+    ├── Institution: Instituto Universitário de Lisboa
+    ├── Degree: Master's in Computer Science and Engineering
+    ├── Status: In Progress (2025 - 2027)
+    ├── Location: Lisboa, Portugal
+    └── Focus: Secure systems, UX, agile, and business`;
           }
           else if (command === "tree professional_experience") {
-            response = `professional_experience
-├── Software Engineer at TechCorp (2020 - Present)
-│   ├── Developed web applications using React and Node.js
-│   └── Led a team of 5 developers
-└── Intern at DevStart (2019)
-    ├── Assisted in developing mobile applications
-    └── Gained experience in Agile methodologies`;
+            response = `professional_experience/
+├── PRTE_Internship/
+│   ├── Role: Full Stack Developer Intern
+│   ├── Period: Mar 2025 - Jun 2025
+│   ├── Location: Covilhã
+│   ├── Project: Evotero (SaaS platform)
+│   ├── Tech Stack: Next.js, NestJS, PostgreSQL, React Email, Shadcn/UI
+│   └── Responsibilities:
+│       ├── Contributed to SaaS platform development
+│       ├── Built C4 diagrams and Docs as Code
+│       └── Agile sprints and delivery focus
+├── STAR_Junior_Enterprise_CTO/
+│   ├── Role: Chief Technology Officer
+│   ├── Period: Jun 2023 - Jun 2024
+│   ├── Location: Covilhã
+│   ├── Tech Stack: WordPress, Three.js, HTML/CSS, Git
+│   └── Responsibilities:
+│       ├── Led technical team in digital projects
+│       ├── Administered email accounts, domains, and hosting
+│       └── Designed and implemented web architectures
+└── STAR_Junior_Enterprise_Frontend/
+    ├── Role: Frontend Developer
+    ├── Period: Jan 2023 - Jun 2025
+    ├── Location: Covilhã
+    ├── Tech Stack: React, WordPress, HTML/CSS, Git
+    └── Responsibilities:
+        ├── Developed React web applications
+        └── Maintained institutional WordPress websites`;
+          }
+          else if (command === "tree volunteer") {
+            response = `volunteer/
+└── Thirst_Project_Portugal/
+    ├── Role: Director of Technology and Information Systems
+    ├── Period: Oct 2024 - Present
+    ├── Location: Lisbon, Portugal
+    ├── Organization: Thirst Project Portugal
+    ├── Tech Stack: WordPress, Firebase, HTML/CSS, Google Workspace
+    └── Responsibilities:
+        ├── Led tech projects with WordPress, Firebase, Google Workspace
+        ├── Fostered digital collaboration and strategies
+        ├── Ongoing enhancement of digital tools
+        └── Managed technology infrastructure for non-profit organization`;
           }
           else if (command === "open projects") {
-            response = `Opening GitHub Projects... (This is a simulation, no actual link will open)
-Visit:`
+            // Abre o LinkedIn automaticamente em nova aba com fallback
+            setTimeout(() => {
+              const linkedinWindow = window.open('https://github.com/beatrizzfcosta', '_blank');
+              if (!linkedinWindow) {
+                // Fallback se window.open for bloqueado
+                const link = document.createElement('a');
+                link.href = 'https://github.com/beatrizzfcosta';
+                link.target = '_blank';
+                link.click();
+              }
+            }, 100);
+            
+            response = `
+🌐 GitHub: <a href="https://github.com/beatrizzfcosta" target="_blank" class="text-blue-400 hover:text-blue-300 underline">https://github.com/beatrizfcosta</a>
+💼 LinkedIn: <a href="https://www.linkedin.com/in/beatriz-fima-da-costa" target="_blank" class="text-blue-400 hover:text-blue-300 underline">www.linkedin.com/in/beatriz-fima-da-costa</a>
+📄 Portfolio: <a href="https://beatrizzfcosta.github.io" target="_blank" class="text-blue-400 hover:text-blue-300 underline">https://beatrizfcosta.github.io/</a>`;
           }
           else if (command === "clear") {
             output.innerHTML = "";
